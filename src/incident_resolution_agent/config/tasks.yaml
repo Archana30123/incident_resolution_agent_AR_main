@@ -1,0 +1,29 @@
+triage_task:
+  description: >
+    Triage the incident and determine the appropriate course of action.
+  expected_output: >
+    A triage report that categorizes the incident, assesses its severity, and outlines the next steps for resolution.
+  agent: incident_triage_agent
+
+log_analysis_task:
+  description: >
+    Analyze system logs to identify patterns and anomalies related to the incident.
+  expected_output: >
+    An analysis report that highlights any anomalies or patterns found in the logs, along with insights that may help in identifying the root cause of the incident.
+  agent: log_analysis_agent
+
+
+root_cause_analysis_task:
+  description: >
+    Conduct a thorough investigation to determine the root cause of the incident.
+  expected_output: >
+    A root cause analysis report that identifies the underlying causes of the incident and provides recommendations for preventing similar incidents in the future.
+  agent: root_cause_analysis_agent
+
+
+Resolution_task:
+  description: >
+    Implement effective solutions to resolve the incident and restore normal operations.
+  expected_output: >
+    A resolution report that details the actions taken to resolve the incident, confirms that the issue has been addressed, and outlines any follow-up steps required.
+  agent: Resolution_agent  
