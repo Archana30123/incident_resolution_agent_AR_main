@@ -1,0 +1,100 @@
+
+incident_intelligence:
+ volumes:
+   - .input:/app/input
+   - .output:/app/output
+   - .knowledge:/app/knowledge
+
+ env_file:
+    - .env  
+ environment:
+   - PYTHONUNBUFFERED= "1"
+   - TASK_NAME= full
+ command: ["python", "-m", "incident_intelligence.main", "--task_name", "full"]  
+ 
+
+incident_triage_agent:
+ build:
+  context:
+  dockerfile: Dockerfile
+ container_name: incident_triage_agent
+  volumes:
+   - .input:/app/input
+   - .output:/app/output
+   - .knowledge:/app/knowledge
+  env_file:
+    - .env
+  environment:
+    - PYTHONUNBUFFERED: "1"
+    - TASK_NAME: incident_triage
+    - MODEL_NAME: ${MODEL: GPT-4O-mini}
+    - OPENAI_API_KEY: ${OPENAI_API_KEY}
+    - OPENAI_API_BASE: ${OPENAI_API_BASE: https://api.openai.com/v1}
+ command: ["python", "-m", "incident_triage_agent.main", "--task_name", "incident_triage"] 
+
+
+log_analysis_agent:
+ build:
+  context:
+  dockerfile: Dockerfile
+  container_name: log_analysis_agent
+  volumes:
+   - .input:/app/input
+   - .output:/app/output
+   - .knowledge:/app/knowledge
+  env_file:
+    - .env
+  environment:
+    - PYTHONUNBUFFERED: "1"
+    - TASK_NAME: log_analysis
+    - MODEL_NAME: ${MODEL: GPT-4O-mini}
+    - OPENAI_API_KEY: ${OPENAI_API_KEY}
+    - OPENAI_API_BASE: ${OPENAI_API_BASE: https://api.openai.com/v1}
+ command: ["python", "-m", "log_analysis_agent.main", "--task_name", "log_analysis"]
+
+
+
+ root_cause_analysis_agent:
+ build: 
+  context:
+  dockerfile: Dockerfile
+  container_name: root_cause_analysis_agent
+  volumes:
+   - .input:/app/input
+   - .output:/app/output
+   - .knowledge:/app/knowledge
+  env_file:
+    - .env
+  environment:
+    - PYTHONUNBUFFERED: "1"
+    - TASK_NAME: root_cause_analysis
+    - MODEL_NAME: ${MODEL: GPT-4O-mini}
+    - OPENAI_API_KEY: ${OPENAI_API_KEY}
+    - OPENAI_API_BASE: ${OPENAI_API_BASE: https://api.openai.com/v1}
+  command: ["python", "-m", "root_cause_analysis_agent.main", "--task_name", "root_cause_analysis"]
+
+
+
+Resolution_agent:
+ build:
+  context:
+  dockerfile: Dockerfile
+  container_name: resolution_agent
+  volumes:
+   - .input:/app/input
+   - .output:/app/output
+   - .knowledge:/app/knowledge
+  env_file:
+    - .env
+  environment:
+    - PYTHONUNBUFFERED: "1"
+    - TASK_NAME: resolution
+    - MODEL_NAME: ${MODEL: GPT-4O-mini}
+    - OPENAI_API_KEY: ${OPENAI_API_KEY}
+    - OPENAI_API_BASE: ${OPENAI_API_BASE: https://api.openai.com/v1}
+  command: ["python", "-m", "resolution_agent.main", "--task_name", "resolution"] 
+
+
+
+  
+
