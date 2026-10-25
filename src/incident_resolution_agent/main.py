@@ -121,3 +121,6 @@ if __name__ == "__main__":
     
     
 print("application completed successfully")    
+
+print("application completed successfully and exiting") 
+print("application completed successfully again") 
