@@ -118,3 +118,6 @@ if __name__ == "__main__":
     parser.add_argument('--task', choices=['full', 'log_analysis', 'root_cause'], default=os.getenv('TASK_NAME', 'full'))
     args = parser.parse_args()
     run(args.task)
+    
+    
+print("application completed successfully")    
