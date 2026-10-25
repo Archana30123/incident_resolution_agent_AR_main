@@ -8,6 +8,11 @@ dependencies = [
     "crewai[tools]==1.14.7"
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
+
 [project.scripts]
 incident_resolution_agent = "incident_resolution_agent.main:run"
 run_crew = "incident_resolution_agent.main:run"
